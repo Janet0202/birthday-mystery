@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第零号包裹 · ZERO EXPRESS</title>
+<style>
+:root{color-scheme:dark;--bg:#101015;--paper:#191920;--line:#39333a;--text:#f0e9e8;--muted:#aaa0a5;--red:#c24a56}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0%,#292027,transparent 55%),var(--bg);color:var(--text);font:16px/1.8 system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;display:grid;place-items:center;padding:24px}.shell{width:min(100%,520px)}header{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.13em;color:var(--muted);padding:0 4px 18px}header b{color:var(--text);font-size:14px}.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:clamp(24px,6vw,38px);box-shadow:0 25px 60px #0006;min-height:420px}.tag{color:var(--red);font-size:12px;letter-spacing:.2em;font-weight:700}.symbol{text-align:center;font-size:38px;margin:12px 0}h1{font-size:26px;line-height:1.4;margin:16px 0 18px;letter-spacing:.02em}p{color:#c7bcc1;margin:12px 0}.meta{background:#221c23;border-left:2px solid var(--red);padding:12px 16px;color:#d5c3c8;font-size:14px;margin:22px 0}button,input{font:inherit}button{cursor:pointer;border:0;border-radius:7px;background:var(--red);color:white;padding:12px 18px;width:100%;font-weight:700;margin-top:16px}button:hover{background:#db6470}input{width:100%;padding:13px;background:#111115;color:white;border:1px solid #635058;border-radius:7px;outline:none;margin-top:10px}input:focus{border-color:#e47985}.options{display:grid;gap:10px;margin:18px 0}.option{width:100%;margin:0;text-align:left;background:#29232c;border:1px solid #51444e;font-weight:500}.option:hover{background:#49313c}.feedback{min-height:30px;color:#e59ba5;font-size:14px}.small{font-size:12px;color:#9a8f95;text-align:center;margin-top:18px}.progress{display:flex;gap:6px;margin-bottom:22px}.dot{height:4px;flex:1;background:#45353d;border-radius:4px}.dot.done{background:var(--red)}.fragment{border:1px dashed #ab6b75;padding:12px;text-align:center;letter-spacing:.15em;margin-top:16px;color:#ffb4bd}.hide{display:none}.shake{animation:shake .28s}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}.reveal{font-size:42px;text-align:center;letter-spacing:.22em;color:#f3b5bd;margin:32px 0}.ghost{background:transparent;border:1px solid #75515b}
+.feedback{white-space:pre-line;line-height:1.9}
+</style>
+</head>
+<body><main class="shell"><header><b>▣ ZERO EXPRESS</b><span>WAYBILL #000000</span></header><article id="card" class="card" aria-live="polite"></article><div class="small">第零物流 · 记忆核验协议</div></main>
+<script>
+// 修改此处即可更换每一关答案和最终密码。
+const stages=[
+ {tag:'01 / 身份核验',title:'失效的寄件人',story:'寄件人已从物流系统中注销。听筒里却传来一句话：“你明明知道是谁寄来的。”',question:'请提交寄件人的联系方式最后四位。注意：寄件人可能使用过不止一个名字。',answer:'5947',type:'text',placeholder:'四位数字',success:'5947。通讯记录已恢复。寄件人身份确认。……可是系统显示，这份包裹的寄件时间，早于你们第一次认识。将5947的四个数字相加得到25，再将2与5相加，得到第三枚碎片。',fragment:'7',position:3},
+ {tag:'02 / 地址回溯',title:'消失的房间',story:'一份旧宿舍登记记录显示：你们曾生活在同一扇门后。凌晨，门外却出现了第三个人的脚步声。',question:'那个房间的号码是什么？',answer:'501',type:'text',placeholder:'三位房号',success:'地址匹配。房间号501的第一位是第一枚密码碎片。',fragment:'5',position:1},
+ {tag:'03 / 订单调查',title:'最后一顿饭',story:'系统找回一张破损的订单。只有真正经历过这一切的人，才能选出正确的食物。',question:'你记忆中的订单是哪一份？',answer:'手抓饼 + 里脊肉',type:'choice',options:['手抓饼 + 火腿肠','手抓饼 + 里脊肉','鸡蛋灌饼 + 里脊肉','手抓饼 + 培根'],success:'订单还原成功。手抓饼三个字、里脊肉三个字，两部分相加得到第二枚密码碎片。',fragment:'6',position:2},
+ {tag:'04 / 地点追踪',title:'不存在的便利店',story:'这家便利店在凌晨 2:61 仍然营业。地图找不到它，但你们曾经无数次走进那里。',question:'你们以前经常去的便利店叫什么？',answer:'罗森',type:'text',placeholder:'便利店名称',success:'地点确认。罗森只是通往下一份档案的路标，本关不生成密码碎片。'},
+ {tag:'05 / 证词修复',title:'被删除的对话',story:'系统恢复了一段从未公开的聊天。每一次复原，都会消失相同的三个字。',question:'补全：“岸本的手可以 ______”',answer:'上天堂',type:'text',placeholder:'缺失的三个字',success:'聊天记录恢复。完整证词共九个字，扣去你补全的“上天堂”三个字，得到第四枚密码碎片。',fragment:'6',position:4}
+];
+const FINAL_PASSWORD='5676';const PICKUP_POINT='2';let step=-1;let fragments=[];let firstStageMistakes=0;let aliasRevealed=false;const card=document.getElementById('card');
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(){
+ if(step===-1){card.innerHTML='<div class="tag">异常物流通知</div><div class="symbol">◈</div><h1>检测到异常包裹</h1><p>该包裹尚未完成身份验证。收件人需要完成五项记忆核验，才能获取最终取件信息。</p><div class="meta">寄件人：未知<br>物品：命运盲盒 × 1<br>签收状态：冻结</div><button id="next">开始身份核验 →</button>';document.getElementById('next').onclick=()=>{step=0;render()};return;}
+ if(step<stages.length){const s=stages[step];card.innerHTML=`<div class="progress">${stages.map((_,i)=>`<div class="dot ${i<=step?'done':''}"></div>`).join('')}</div><div class="tag">${s.tag}</div><h1>${s.title}</h1><p>${s.story}</p><div class="meta">${s.question}</div>${s.type==='choice'?`<div class="options">${s.options.map((o,i)=>`<button class="option" data-choice="${i}">${escapeHtml(o)}</button>`).join('')}</div>`:`<form id="answer-form"><input id="answer" autocomplete="off" placeholder="${s.placeholder}" aria-label="关卡答案"><button>验证记忆 →</button></form>`}<div id="feedback" class="feedback" role="status"></div>`;
+ function check(v){if(v.replace(/\s/g,'')===s.answer.replace(/\s/g,'')){if(step===0){firstStageMistakes=0;aliasRevealed=false;}if(s.fragment)fragments.push({position:s.position,digit:s.fragment});card.innerHTML=`<div class="tag">验证通过</div><h1>记忆已恢复</h1><p>${s.success}</p>${s.fragment?`<div class="fragment">第 ${s.position} 位密码碎片：${s.fragment}</div>`:''}<button id="continue">${step===stages.length-1?'查询取件站点 →':'读取下一份档案 →'}</button>`;document.getElementById('continue').onclick=()=>{step++;render()};}else{if(step===0){
+   firstStageMistakes++;
+   let message='';
+   if(v.replace(/\s/g,'')==='9888'){
+     aliasRevealed=true;
+     message='【身份匹配成功……？】\n\n你输对了。\n\n身份匹配成功。\n身份匹配成功。\n身份匹配成功。\n\n……为什么会有三条？\n\n但是，对不代表正确。\n\n你找到了「砂纸既视感」的一组记录。\n可你怎么确定……屏幕另一端的那个，也是寄件人？\n\n[警告：该记录不属于本次通讯档案]';
+   }else if(!aliasRevealed && firstStageMistakes===1){
+     message='【身份核验失败】\n\n未检测到有效的寄件人身份。\n\n奇怪的是，系统里保存着一段与你有关的记录。\n\n那是一场很久以前的群聊。\n\n寄件人就在那里。\n\n你应该还记得，是从哪里找到那个数字的。';
+   }else if(!aliasRevealed){
+     aliasRevealed=true;
+     message='【检测到重复身份】\n\n正在回溯通讯记录……\n\n[档案恢复异常]\n\n一个名字不断出现在不同的账户里。\n\n砂纸既视感。\n砂纸既视感。\n砂纸既视感。\n\n系统无法确定，哪一个才是真正的寄件人。';
+   }else{
+     message='【警告：重复身份正在覆盖原始记录】\n\n不要再寻找那个游戏账号了。\n\n你最初认识寄件人的那串数字，并不属于游戏。\n\n它属于 QQ。\n\n那串号码还在等你。\n\n请输入它的最后四位。\n\n这次，别认错人。';
+   }
+   document.getElementById('feedback').textContent=message;
+  }else{
+   document.getElementById('feedback').textContent='记忆校验失败。请重新确认。';
+  }
+  card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake')}}
+ if(s.type==='choice')card.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>check(s.options[Number(b.dataset.choice)]));else document.getElementById('answer-form').onsubmit=e=>{e.preventDefault();check(document.getElementById('answer').value.trim())};return;}
+ if(step===stages.length){card.innerHTML=`<div class="tag">06 / 异常物流记录</div><h1>两处取件点</h1><p>系统查到同一份包裹出现了两条取件站点记录。只有一处存放真实包裹。</p><div class="meta">站点 1：其他快递代收点<br>站点 2：近邻宝</div><p>请选择要前往的取件点。</p><div class="options"><button class="option" data-point="1">站点 1 · 其他快递代收点</button><button class="option" data-point="2">站点 2 · 近邻宝</button></div><div class="feedback" id="feedback" role="status"></div>`;card.querySelectorAll('[data-point]').forEach(btn=>btn.onclick=()=>{if(btn.dataset.point===PICKUP_POINT){step++;render()}else document.getElementById('feedback').textContent='路径核验失败：该站点没有对应的包裹记录。'});return;}
+ if(step===stages.length+1){card.innerHTML=`<div class="tag">最终结算 / 运单 #000000</div><h1>命运盲盒 · 等待取件</h1><p>站点已确认：近邻宝，编号 2。将四枚数字按标注的位次排列，和站点编号拼成完整取件码。</p><div class="fragment">站点编号：2　｜　${fragments.slice().sort((a,b)=>a.position-b.position).map(f=>f.position+'号位: '+f.digit).join(' · ')}</div><form id="final-form"><input id="final-input" autocomplete="off" placeholder="输入完整取件码，如 1-1234" aria-label="完整取件码"><button>核验取件凭证 →</button></form><div class="feedback" id="feedback" role="status"></div>`;document.getElementById('final-form').onsubmit=e=>{e.preventDefault();if(document.getElementById('final-input').value.trim().replace(/\s/g,'').replace(/[－—–]/g,'-')===PICKUP_POINT+'-'+FINAL_PASSWORD){step++;render()}else document.getElementById('feedback').textContent='凭证不匹配。请核对站点编号和四位数字。'};return;}
+ card.innerHTML='<div class="tag">核验成功 / 隐藏档案 000</div><h1>命运赌局已结算</h1><div class="reveal">2-5676</div><p>你的取件凭证已经恢复。真正的奖品还未揭晓。</p><div class="meta">取件地点：近邻宝<br>取件码：2-5676<br>包裹状态：等待你亲自领取</div><p>所谓的神秘档案，不过是有人把我们共同经历的普通小事，偷偷珍藏成了线索。</p><p>至于盲盒能开出什么，我也不知道。但能认识你，是我提前开出的隐藏款。生日快乐！</p><button class="ghost" id="restart">重新查看档案</button>';document.getElementById('restart').onclick=()=>{step=-1;fragments=[];firstStageMistakes=0;aliasRevealed=false;render()};}
+
+render();
+</script></body></html>
