@@ -38,6 +38,8 @@ function render(){
      message='【警告：重复身份正在覆盖原始记录】\n\n不要再寻找那个游戏账号了。\n\n你最初认识寄件人的那串数字，并不属于游戏。\n\n它属于 QQ。\n\n那串号码还在等你。\n\n请输入它的最后四位。\n\n这次，别认错人。';
    }
    document.getElementById('feedback').textContent=message;
+  }else if(step===3 && v.replace(/\s/g,'')==='全家'){
+   document.getElementById('feedback').textContent='【检测到记忆偏移】\n\n“全家就是我家。”\n\n……但这真的是模糊记忆中的那一家吗？\n\n还是说，你只是习惯性地写下了「全家」？\n\n[地点档案尚未匹配，请重新确认。]';
   }else{
    document.getElementById('feedback').textContent='记忆校验失败。请重新确认。';
   }
